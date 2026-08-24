@@ -66,6 +66,13 @@ classpilot/
 3. Run `npm run api:dev` for the API at `http://localhost:5000`.
 4. In another terminal, run `npm run dev` for the app at `http://localhost:5173`.
 
+**Vercel deployment**
+If this project is inside a repository wrapper folder, set Vercel's **Root Directory** to
+`classpilot`. Use `npm install` as the install command, `npm run build` as the build command,
+and `dist` as the output directory. Add `MONGO_URI`, `JWT_SECRET`, `JWT_EXPIRE`, `CLIENT_URL`,
+and `NODE_ENV` under Vercel Project Settings → Environment Variables. `VITE_API_URL` may be
+left unset because the frontend uses the same-origin `/api` fallback in production.
+
 Register a teacher account from the app itself (`/register`) — there's no seed script,
 so your first account creates the institute.
 
