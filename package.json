@@ -8,8 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "start": "node api/index.js",
-    "api:dev": "nodemon api/index.js"
+    "start": "node server/index.js",
+    "api:dev": "nodemon server/index.js"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.1",
