@@ -24,7 +24,7 @@ real MongoDB connection; frontend runs `vite build` with zero errors.
 
 **Frontend**
 - React 18 + Vite
-- Tailwind CSS (custom design system — see `frontend/tailwind.config.js`) + Framer Motion
+- Tailwind CSS (custom design system — see `tailwind.config.js`) + Framer Motion
 - React Router, React Hook Form, Axios
 - Recharts (charts), React Hot Toast, Lucide React icons
 - jsPDF + jspdf-autotable (PDF reports & fee receipts), SheetJS/xlsx (Excel export)
@@ -33,38 +33,38 @@ real MongoDB connection; frontend runs `vite build` with zero errors.
 
 ```
 classpilot/
-├── backend/
-│   ├── config/db.js
-│   ├── models/            Teacher, Student, Batch, Attendance, Fee, Payment, Notification, Settings
-│   ├── controllers/       business logic per module
-│   ├── routes/            Express routers
-│   ├── middleware/        JWT protect, global error handler
-│   ├── utils/              token + WhatsApp/SMS/Email message builders
-│   └── server.js
-└── frontend/
-    └── src/
-        ├── api/            one module per backend resource (axios)
-        ├── context/        AuthContext (JWT session state)
-        ├── components/
-        │   ├── layout/     Sidebar, Topbar (with global search), DashboardLayout, ProtectedRoute
-        │   ├── ui/         Button, Card, Modal, Input, Select, StatCard, EmptyState, etc.
-        │   ├── dashboard/  charts + widgets
-        │   ├── students/ batches/ attendance/ fees/ notifications/   feature-specific components
-        ├── pages/          one page per route
-        └── utils/          formatters, constants, CSV/PDF export helpers
+├── src/                    React frontend
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── context/
+│   ├── services/            one module per backend resource (axios)
+│   ├── App.jsx
+│   └── main.jsx
+├── api/                    Backend/API
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   └── index.js
+├── public/
+├── index.html
+├── package.json
+├── vite.config.js
+├── vercel.json
+├── .env
+├── .gitignore
+└── README.md
 ```
 
 ## Setup
 
-**Backend**
-1. `cd backend && npm install`
-2. Copy `.env.example` → `.env`, fill in your `MONGO_URI` and `JWT_SECRET`
-3. `npm run dev` — API runs at `http://localhost:5000` (health check: `GET /api/health`)
-
-**Frontend**
-1. `cd frontend && npm install`
-2. Copy `.env.example` → `.env` (defaults already point at `http://localhost:5000/api`)
-3. `npm run dev` — app runs at `http://localhost:5173`
+1. Run `npm install` from the project root.
+2. Copy `.env.example` to `.env`, then fill in `MONGO_URI` and `JWT_SECRET`.
+3. Run `npm run api:dev` for the API at `http://localhost:5000`.
+4. In another terminal, run `npm run dev` for the app at `http://localhost:5173`.
 
 Register a teacher account from the app itself (`/register`) — there's no seed script,
 so your first account creates the institute.
@@ -110,7 +110,7 @@ require an `Authorization: Bearer <token>` header.
 ### Notification simulation
 
 Fee reminders are generated as real WhatsApp/SMS/Email-ready text (see
-`backend/utils/messageTemplates.js`) and logged to the `Notification` collection — the actual
+`api/utils/messageTemplates.js`) and logged to the `Notification` collection — the actual
 send is simulated rather than wired to a live provider. Swapping in Twilio (SMS/WhatsApp) or
 Nodemailer (Email) later just means calling their API inside `notificationController.js`
 instead of only creating the DB record.
