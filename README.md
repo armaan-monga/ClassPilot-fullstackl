@@ -148,3 +148,6 @@ on purpose, to keep the delivered code correct and maintainable:
 - Excel import for bulk student onboarding
 - Holiday calendar (new backend model)
 
+
+
+ClassPilot deployment test
