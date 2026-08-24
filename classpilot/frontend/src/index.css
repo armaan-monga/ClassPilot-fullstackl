@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-mesh-cream bg-fixed;
+    background-color: theme("colors.cream");
+  }
+
+  ::selection {
+    background-color: theme("colors.iris.200");
+    color: theme("colors.iris.900");
+  }
+
+  /* Visible keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid theme("colors.iris.500");
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60 rounded-3xl shadow-soft;
+  }
+
+  .glass-card-solid {
+    @apply bg-white rounded-3xl shadow-soft border border-ink/5;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-iris-500 px-5 py-2.5
+      font-semibold text-white shadow-glow transition-all duration-200
+      hover:bg-iris-600 hover:-translate-y-0.5 active:translate-y-0
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-5 py-2.5
+      font-semibold text-ink border border-ink/10 transition-all duration-200
+      hover:border-iris-300 hover:text-iris-600 hover:-translate-y-0.5 active:translate-y-0
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-blossom-500 px-5 py-2.5
+      font-semibold text-white shadow-glow-blossom transition-all duration-200
+      hover:bg-blossom-600 hover:-translate-y-0.5 active:translate-y-0
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .input-field {
+    @apply w-full rounded-2xl border border-ink/10 bg-white px-4 py-2.5 text-ink placeholder:text-ink/40
+      transition-colors focus:border-iris-400 outline-none;
+  }
+
+  .label-text {
+    @apply block text-sm font-semibold text-ink/70 mb-1.5;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 rounded-2xl px-4 py-2.5 text-sm font-semibold text-white/70
+      transition-all duration-200 hover:bg-white/10 hover:text-white;
+  }
+
+  .nav-item-active {
+    @apply bg-white/15 text-white shadow-inner;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme("colors.iris.200");
+    border-radius: 999px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
