@@ -19,15 +19,7 @@ services:
         value: 7d
       - key: CLIENT_URL
         sync: false
-      - key: EMAIL_HOST
-        sync: false
-      - key: EMAIL_PORT
-        value: "465"
-      - key: EMAIL_FAMILY
-        value: "4"
-      - key: EMAIL_USER
-        sync: false
-      - key: EMAIL_PASS
+      - key: RESEND_API_KEY
         sync: false
       - key: EMAIL_FROM
         sync: false

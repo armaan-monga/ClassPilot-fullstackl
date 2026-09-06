@@ -82,9 +82,8 @@ the build command and `node server/index.js` as the start command. Add these env
 - `JWT_SECRET` — a long random secret
 - `JWT_EXPIRE=7d`
 - `CLIENT_URL` — the deployed Vercel URL, for example `https://classpilot.vercel.app`
-- `EMAIL_HOST=smtp.gmail.com`
-- `EMAIL_PORT=587`
-- `EMAIL_USER`, `EMAIL_PASS`, and `EMAIL_FROM` — Gmail SMTP credentials; use a Google App Password
+- `RESEND_API_KEY` — API key from Resend
+- `EMAIL_FROM` — a verified Resend sender, for example `ClassPilot <noreply@yourdomain.com>`
 
 After the first deploy, copy the Render URL into Vercel's `VITE_API_URL`, copy the Vercel URL
 into Render's `CLIENT_URL`, then redeploy both services. Verify the API at
@@ -131,13 +130,10 @@ require an `Authorization: Bearer <token>` header.
 - **Design** — custom Tailwind token system (Iris/Tangerine/Meadow/Blossom/Sky palette,
   Baloo 2 + Plus Jakarta Sans), glassmorphism cards, gradient sidebar, responsive down to mobile
 
-### Notification simulation
+### Email reminders
 
-Fee reminders are generated as real WhatsApp/SMS/Email-ready text (see
-`api/utils/messageTemplates.js`) and logged to the `Notification` collection — the actual
-send is simulated rather than wired to a live provider. Swapping in Twilio (SMS/WhatsApp) or
-Nodemailer (Email) later just means calling their API inside `notificationController.js`
-instead of only creating the DB record.
+Fee reminders are generated from the shared email template and sent through the Resend HTTPS API.
+The resulting delivery is logged to the `Notification` collection.
 
 ## Known trade-offs / not included
 
@@ -159,7 +155,7 @@ on purpose, to keep the delivered code correct and maintainable:
 
 ## Future Improvements
 
-- Real WhatsApp Business API / Twilio SMS / Nodemailer integration
+- Real WhatsApp Business API / Twilio SMS integration
 - Role-based access (multiple staff per institute)
 - QR-code based attendance
 - Excel import for bulk student onboarding
