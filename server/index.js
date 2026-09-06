@@ -30,6 +30,17 @@ const allowedOrigins = [
   "http://127.0.0.1:5175",
 ].filter(Boolean);
 
+const isAllowedProductionOrigin = (origin) => {
+  try {
+    const url = new URL(origin);
+    const isVercelOrigin = url.protocol === "https:" && url.hostname.endsWith(".vercel.app");
+    const isConfiguredVercelUrl = process.env.VERCEL_URL && url.hostname === process.env.VERCEL_URL;
+    return isVercelOrigin || isConfiguredVercelUrl;
+  } catch {
+    return false;
+  }
+};
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -41,7 +52,7 @@ app.use(
         /^http:\/\/localhost:\d+$/.test(origin) ||
         /^http:\/\/127\.0\.0\.1:\d+$/.test(origin);
 
-      if (allowedOrigins.includes(origin) || isLocalDevOrigin) {
+      if (allowedOrigins.includes(origin) || isLocalDevOrigin || isAllowedProductionOrigin(origin)) {
         return callback(null, true);
       }
 
