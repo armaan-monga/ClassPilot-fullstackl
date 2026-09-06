@@ -74,6 +74,10 @@ if (process.env.NODE_ENV !== "production") {
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Health check
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "ClassPilot API is running", health: "/api/health" });
+});
+
 app.get("/api/health", (req, res) => res.json({ success: true, message: "ClassPilot API is running" }));
 
 // Mount routes
