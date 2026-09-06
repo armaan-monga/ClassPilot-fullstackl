@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper;
+  }
+
+  ::selection {
+    background-color: theme("colors.petrol.200");
+    color: theme("colors.petrol.900");
+  }
+
+  /* Visible keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid theme("colors.petrol.500");
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white rounded-2xl border border-ink/10 shadow-soft;
+  }
+
+  .glass-card-solid {
+    @apply bg-white rounded-2xl shadow-soft border border-ink/10;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-petrol-500 px-5 py-2.5
+      font-semibold text-white transition-colors duration-150
+      hover:bg-petrol-600 active:bg-petrol-700
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5
+      font-semibold text-ink border border-ink/15 transition-colors duration-150
+      hover:border-petrol-400 hover:text-petrol-600
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-oxblood-500 px-5 py-2.5
+      font-semibold text-white transition-colors duration-150
+      hover:bg-oxblood-600 active:bg-oxblood-700
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-ink/15 bg-white px-4 py-2.5 text-ink placeholder:text-ink/40
+      transition-colors focus:border-petrol-400 outline-none;
+  }
+
+  .label-text {
+    @apply block text-sm font-semibold text-ink/70 mb-1.5;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-semibold text-white/70
+      transition-colors duration-150 hover:bg-white/10 hover:text-white;
+  }
+
+  .nav-item-active {
+    @apply bg-white/15 text-white;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme("colors.petrol.200");
+    border-radius: 999px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
