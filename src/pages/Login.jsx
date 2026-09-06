@@ -31,6 +31,19 @@ export default function Login() {
     }
   };
 
+  const handleDemoLogin = async () => {
+    setLoading(true);
+    try {
+      await login("demo@classpilot.local", "demo1234");
+      toast.success("Demo account logged in successfully!");
+      navigate("/");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Demo login failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-petrol-800 p-4">
       <div className="w-full max-w-md">
@@ -86,6 +99,16 @@ export default function Login() {
 
             <Button type="submit" loading={loading} className="mt-1 w-full">
               Log In
+            </Button>
+
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={handleDemoLogin}
+              loading={loading}
+              className="w-full"
+            >
+              Use Demo Account
             </Button>
           </form>
 
