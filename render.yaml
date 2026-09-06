@@ -23,6 +23,8 @@ services:
         sync: false
       - key: EMAIL_PORT
         value: "587"
+      - key: EMAIL_FAMILY
+        value: "4"
       - key: EMAIL_USER
         sync: false
       - key: EMAIL_PASS

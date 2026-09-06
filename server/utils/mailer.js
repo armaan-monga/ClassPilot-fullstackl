@@ -34,7 +34,7 @@ const getTransporter = async () => {
         port: Number(EMAIL_PORT) || 587,
         secure: Number(EMAIL_PORT) === 465,
         requireTLS: Number(EMAIL_PORT) === 587,
-        family: Number(process.env.EMAIL_FAMILY) || undefined,
+        family: Number(process.env.EMAIL_FAMILY) || 4,
         connectionTimeout: 20000,
         greetingTimeout: 20000,
         socketTimeout: 30000,
